@@ -1,7 +1,6 @@
 {
-  "commitNumber": 2,
-  "totalCommits": 2,
-  "timestamp": "2025-12-09T20:19:23.368Z",
-  "generatedAt": "2026-08-09T13:24:37.574Z",
-  "project": "Git Time Machine"
+  "type": "single",
+  "timestamp": "2025-05-15T09:15:00Z",
+  "message": "Batch May 15 commit 1/2",
+  "updatedAt": "2026-08-09T13:33:20.215Z"
 }
