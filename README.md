@@ -14,12 +14,48 @@
 
 ## ✨ Features
 
-- 📅 **Automated Daily Range Committer & Auto-Push**: Generate $N$ commits/day between any start and end date and push to GitHub automatically.
+- ⚡ **Automated Daily Range Committer & Auto-Push**: Specify start date, end date, and commits/day to automatically generate and push commits to GitHub without manual intervention.
 - 🕒 **Custom Timestamp Injection**: Programmatically set exact `Author Date` and `Committer Date` metadata on individual or batch commits.
 - 📊 **ANSI Terminal Contribution Heatmap**: Render a 52-week GitHub-style activity grid directly inside your CLI terminal.
 - 📜 **Git Log Metadata Analyzer**: Inspect commit hashes, author/committer date offsets, and activity metrics.
 - 💾 **CSV & JSON Exporters**: Export full commit log records to `history.json` or `history.csv`.
 - 🎮 **Interactive Prompt Menu & CLI Flags**: Full support for both interactive prompts (`node index.js`) and command-line flags.
+
+---
+
+## ⚡ New Feature: Automated Date Range Daily Committer (`range`)
+
+The **Automated Daily Range Committer** allows you to specify a start date, end date, and number of commits per day. It generates all historical commits across the range with timestamps evenly distributed throughout each day and automatically pushes them to your GitHub repository.
+
+### CLI Usage:
+```bash
+node index.js range --start 2025-05-20 --end 2025-05-30 --per-day 5
+```
+
+### Options Breakdown:
+| Parameter | Flag | Description | Default |
+| :--- | :--- | :--- | :--- |
+| **Start Date** | `--start` or `-s` | Beginning date (`YYYY-MM-DD`) | Required |
+| **End Date** | `--end` or `-e` | Ending date (`YYYY-MM-DD`) | Required |
+| **Commits/Day** | `--per-day` or `-p` | Number of commits created on each day | `1` |
+| **Auto Push** | `--no-push` | Flag to disable automatic GitHub push | `true` |
+| **Remote** | `--remote` | Target Git remote name | `origin` |
+| **Branch** | `--branch` | Target branch name | `main` |
+
+### Programmatic API Usage:
+```javascript
+import { generateDailyCommitsRange } from "./src/commitGenerator.js";
+
+// Generate 5 commits per day for every day between May 20 & May 30, 2025 and auto-push to GitHub
+await generateDailyCommitsRange({
+  startDate: "2025-05-20",
+  endDate: "2025-05-30",
+  commitsPerDay: 5,
+  autoPush: true,
+  remote: "origin",
+  branch: "main"
+});
+```
 
 ---
 
@@ -133,8 +169,7 @@ node index.js
 
 ### 2. Command Line Interface (CLI)
 
-#### Generate Daily Commits Across a Date Range & Auto-Push
-Generate $N$ commits per day between a start and end date, automatically pushing to GitHub when finished:
+#### Automated Date Range Committer & Auto-Push (`range`)
 ```bash
 node index.js range --start 2025-05-20 --end 2025-05-30 --per-day 5
 ```
