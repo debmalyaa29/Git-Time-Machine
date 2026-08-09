@@ -1,9 +1,25 @@
 # ⏳ Git Time Machine
 
-**Git Time Machine** is an educational learning tool and developer utility designed to demonstrate how Git stores commit metadata, handles timestamps, and how services like GitHub use commit dates to render contribution activity graphs.
+[![Node.js](https://img.shields.io/badge/Node.js-v16%2B-brightgreen.svg)](https://nodejs.org/)
+[![Git](https://img.shields.io/badge/Git-v2.0%2B-orange.svg)](https://git-scm.com/)
+[![License](https://img.shields.io/badge/License-ISC-blue.svg)](LICENSE)
+[![ESModules](https://img.shields.io/badge/ECMAScript-ES%20Modules-yellow.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
+
+**Git Time Machine** is an educational developer utility designed to demonstrate Git commit metadata manipulation, timestamp formatting, history log analysis, and GitHub contribution activity graph rendering.
 
 > ⚠️ **Educational & Safety Disclaimer**  
-> This project is designed strictly as a Git internals learning tool to explore commit object structure, environment variables (`GIT_AUTHOR_DATE`, `GIT_COMMITTER_DATE`), and historical metadata. It is **not** intended to bypass security controls, falsify work history, or violate platform Terms of Service. Always use this tool in isolated test repositories.
+> This project is built strictly as a Git internals learning tool to explore commit object structure, environment variables (`GIT_AUTHOR_DATE`, `GIT_COMMITTER_DATE`), and historical metadata. It is **not** intended to bypass security controls, falsify work history, or violate platform Terms of Service. Always use this tool in isolated test repositories.
+
+---
+
+## ✨ Features
+
+- 📅 **Automated Daily Range Committer & Auto-Push**: Generate $N$ commits/day between any start and end date and push to GitHub automatically.
+- 🕒 **Custom Timestamp Injection**: Programmatically set exact `Author Date` and `Committer Date` metadata on individual or batch commits.
+- 📊 **ANSI Terminal Contribution Heatmap**: Render a 52-week GitHub-style activity grid directly inside your CLI terminal.
+- 📜 **Git Log Metadata Analyzer**: Inspect commit hashes, author/committer date offsets, and activity metrics.
+- 💾 **CSV & JSON Exporters**: Export full commit log records to `history.json` or `history.csv`.
+- 🎮 **Interactive Prompt Menu & CLI Flags**: Full support for both interactive prompts (`node index.js`) and command-line flags.
 
 ---
 
@@ -57,7 +73,7 @@ const customGit = git.env({
 ### 3. How GitHub Processes Contribution Graphs
 GitHub's contribution graph relies on commit metadata according to the following rules:
 
-1. **Email Match**: The author email in the commit must match an email address registered and verified in your GitHub account.
+1. **Email Match**: The author email in the commit must match an email address registered and verified in your GitHub account ([settings/emails](https://github.com/settings/emails)).
 2. **Target Branch**: Commits must be made to the repository's default branch (usually `main` or `master`) or the `gh-pages` branch.
 3. **Date Attribute**: GitHub displays contribution squares based on the **Author Date** (converted to the user's local timezone).
 4. **Repository Visibility**: Private repository commits are only visible if enabled in your profile settings.
@@ -82,11 +98,11 @@ git-time-machine/
 
 ### Module Responsibilities:
 
-* [index.js](file:///c:/Git-Time-Machine/index.js): Entry point supporting CLI flags (e.g. `generate`, `analyze`, `heatmap`, `export`, `push`) and an interactive menu fallback when invoked without arguments.
-* [src/commitGenerator.js](file:///c:/Git-Time-Machine/src/commitGenerator.js): Manages batch creation of commits across date ranges. Writes metadata into `data.json` before each commit so Git detects changed content.
-* [src/dateGenerator.js](file:///c:/Git-Time-Machine/src/dateGenerator.js): Provides functions for generating random dates, custom year/month/day timestamps, batch date sorting, and strict ISO-8601 formatting.
-* [src/gitManager.js](file:///c:/Git-Time-Machine/src/gitManager.js): Handles Git repo auto-initialization, dual author/committer date environment overrides, structured log retrieval, and safe remote pushing.
-* [src/historyAnalyzer.js](file:///c:/Git-Time-Machine/src/historyAnalyzer.js): Analyzes commit log data, generates ANSI terminal contribution heatmaps, calculates metrics, and exports records to JSON/CSV.
+* [`index.js`](./index.js): Entry point supporting CLI flags (`range`, `generate`, `commit`, `analyze`, `heatmap`, `export`, `push`) and an interactive menu fallback.
+* [`src/commitGenerator.js`](./src/commitGenerator.js): Manages batch creation of commits across date ranges and automated range commits with auto-push.
+* [`src/dateGenerator.js`](./src/dateGenerator.js): Provides functions for generating random dates, custom year/month/day timestamps, batch date sorting, and strict ISO-8601 formatting.
+* [`src/gitManager.js`](./src/gitManager.js): Handles Git repo auto-initialization, dual author/committer date environment overrides, structured log retrieval, and safe remote pushing.
+* [`src/historyAnalyzer.js`](./src/historyAnalyzer.js): Analyzes commit log data, generates ANSI terminal contribution heatmaps, calculates metrics, and exports records to JSON/CSV.
 
 ---
 
@@ -94,9 +110,10 @@ git-time-machine/
 
 1. **Prerequisites**: Ensure Node.js (v16+) and Git are installed on your machine.
 
-2. **Clone / Navigate to directory**:
+2. **Clone & Navigate to directory**:
    ```bash
-   cd git-time-machine
+   git clone https://github.com/debmalyaa29/Git-Time-Machine.git
+   cd Git-Time-Machine
    ```
 
 3. **Install Dependencies**:
@@ -117,7 +134,7 @@ node index.js
 ### 2. Command Line Interface (CLI)
 
 #### Generate Daily Commits Across a Date Range & Auto-Push
-Generate N commits per day between a start and end date, automatically pushing to GitHub when finished:
+Generate $N$ commits per day between a start and end date, automatically pushing to GitHub when finished:
 ```bash
 node index.js range --start 2025-05-20 --end 2025-05-30 --per-day 5
 ```
