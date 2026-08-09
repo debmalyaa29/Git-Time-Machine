@@ -116,6 +116,12 @@ node index.js
 
 ### 2. Command Line Interface (CLI)
 
+#### Generate Daily Commits Across a Date Range & Auto-Push
+Generate N commits per day between a start and end date, automatically pushing to GitHub when finished:
+```bash
+node index.js range --start 2025-05-20 --end 2025-05-30 --per-day 5
+```
+
 #### Generate 20 Random Historical Commits
 ```bash
 node index.js generate --count 20
